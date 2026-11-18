@@ -1,0 +1,21 @@
+# ModelSim / Questa
+work/
+transcript
+vsim.wlf
+*.wlf
+# Simulation waveforms
+*.vcd
+*.fst
+*.vpd
+# Generated build and tool outputs
+build/
+obj_dir/
+*.o
+*.so
+*.pyc
+__pycache__/
+# OpenROAD databases and temporary files
+*.odb
+# Operating system files
+.DS_Store
+Thumbs.db
