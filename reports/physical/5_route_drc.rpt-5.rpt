@@ -1,0 +1,9 @@
+violation type: Short
+	srcs: net:_047342_ net:_047346_
+	bbox = (116.1500, 435.9800) - (116.2200, 436.0850) on Layer metal2
+violation type: Short
+	srcs: net:_047342_ net:_047346_
+	bbox = (116.1500, 436.0150) - (116.2200, 436.0850) on Layer metal2
+violation type: Short
+	srcs: net:_047342_ net:_047343_
+	bbox = (116.3400, 436.0150) - (116.4100, 436.0300) on Layer metal2
