@@ -19,6 +19,8 @@ AES-128 encryption accelerator in **SystemVerilog**, with functional testbenches
 - `tb/` — eleven SystemVerilog testbenches and an S-box reference file
 - `synthesis/aes_128_synth.v` — Yosys-generated synthesis netlist
 - `reports/synthesis.log` — synthesis log
+- `physical/config.mk` and `constraints/constraint.sdc` — committed OpenROAD configuration and SDC
+- `reports/physical/` — original floorplan, placement, CTS, routing, finish STA and synthesis-check reports
 - `physical_design/STATUS.md` — physical-design evidence and remaining checks
 
 ## Verification
@@ -39,25 +41,24 @@ Two known-answer cases are encoded in `tb/tb_aes_128_advanced.sv`:
 | Stage | Evidence / status |
 | --- | --- |
 | AES-128 RTL | Nine source modules committed |
-| Yosys synthesis | Generated netlist and synthesis log committed; design check previously reported 0 problems |
-| Floorplanning and placement | Executed locally in OpenROAD; logs/configuration not yet committed |
-| Clock tree synthesis (CTS) | Executed locally; evidence not yet committed |
-| Global and detailed routing | Executed locally; detailed-routing log and output database observed |
-| STA / SDC | Finish report inspected locally; original constraints and complete timing reports not yet committed |
-| DRC / physical sign-off | **Not yet cleared/established**; short-circuit markers and other checks need reconciliation |
-| Functional simulation | Testbenches committed; passing run logs pending |
+| Yosys synthesis | Synthesized netlist, synthesis log, and check report showing 0 problems |
+| Floorplanning, placement, CTS | Executed; original reports committed in `reports/physical/` |
+| Global and detailed routing | Executed; final detailed-router log screenshot reports 0 violations and 0 antenna violations |
+| GDS | Final GDS file generated locally; not committed due to size |
+| STA / SDC | SDC and finish report committed; setup violations 0, hold violations 0, TNS max 0.00 |
+| Max capacitance | Original finish report has violations (93 reported); repaired ODB exists but has not been verified with post-route extracted parasitics |
+| DRC / physical sign-off | Final router iteration reports 0 violations, but earlier 3 metal2 short markers remain in an intermediate report; independent final sign-off not established |
+| Functional simulation | Testbenches committed; passing simulator transcript still needed |
 
 ## Physical-design observations
 
-See [physical_design/STATUS.md](physical_design/STATUS.md) for values transcribed from the local OpenROAD terminal captures, including timing, routing and remaining violations. These values should not be interpreted as final sign-off.
+See [physical_design/STATUS.md](physical_design/STATUS.md) and the original [OpenROAD reports](reports/physical/) for the evidence. This is an educational implementation, not a sign-off-qualified or fabricated ASIC.
 
-## Next steps
+## Remaining tasks for portfolio completion
 
-1. Commit the **actual** OpenROAD configuration, SDC constraints, relevant scripts and concise logs/reports from the local machine.
-2. Commit ModelSim/Questa test results for the AES-128 known-answer vectors.
-3. Investigate remaining physical violations and confirm final DRC and routing connectivity.
-4. Review final timing constraints and setup/hold reports; document reproducible commands.
-5. Export final layout artifacts only if useful and suitably sized for the repository.
+1. Add a ModelSim/Questa transcript showing the AES-128 known-answer tests passing (or document any failures).
+2. Document the remaining max-capacitance limitation; do not claim timing/electrical sign-off.
+3. Optionally perform independent final DRC and post-repair parasitic STA if full physical sign-off is required.
 
 ## License
 
