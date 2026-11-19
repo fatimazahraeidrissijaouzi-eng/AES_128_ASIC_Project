@@ -34,7 +34,7 @@ Two known-answer cases are encoded in `tb/tb_aes_128_advanced.sv`:
 | `00112233445566778899aabbccddeeff` | `000102030405060708090a0b0c0d0e0f` | `69c4e0d86a7b0430d8cdb78070b4c55a` |
 | `00000000000000000000000000000000` | `00000000000000000000000000000000` | `66e94bd4ef8a2c3b884cfa59ca342b2e` |
 
-**Note:** Testbench source files are present; a committed simulator transcript showing all tests passing is still needed. Test presence is not proof of successful execution.
+**Observed simulation evidence (ModelSim SE-64 10.6d screenshot, 2026-11-19):** the `tb_aes_128_accelerator` simulation transcript displays `TOTAL TESTS = 5`, `TOTAL ERRORS = 0`, and `AES ACCELERATOR TEST PASSED`. This confirms the five checks in that run, but does not independently establish that the separate advanced testbench was executed. A machine-readable transcript has not yet been committed.
 
 ## Implementation status
 
@@ -48,7 +48,7 @@ Two known-answer cases are encoded in `tb/tb_aes_128_advanced.sv`:
 | STA / SDC | SDC and finish report committed; setup violations 0, hold violations 0, TNS max 0.00 |
 | Max capacitance | Original finish report has violations (93 reported); repaired ODB exists but has not been verified with post-route extracted parasitics |
 | DRC / physical sign-off | Final router iteration reports 0 violations, but earlier 3 metal2 short markers remain in an intermediate report; independent final sign-off not established |
-| Functional simulation | Testbenches committed; passing simulator transcript still needed |
+| Functional simulation | ModelSim screenshot shows 5 tests, 0 errors, `AES ACCELERATOR TEST PASSED` for `tb_aes_128_accelerator`; advanced testbench run not confirmed |
 
 ## Physical-design observations
 
@@ -56,7 +56,7 @@ See [physical_design/STATUS.md](physical_design/STATUS.md) and the original [Ope
 
 ## Remaining tasks for portfolio completion
 
-1. Add a ModelSim/Questa transcript showing the AES-128 known-answer tests passing (or document any failures).
+1. Optionally commit a ModelSim/Questa transcript or screenshot documenting the already observed 5/5 successful accelerator tests; separately verify the advanced testbench if broader coverage is required.
 2. Document the remaining max-capacitance limitation; do not claim timing/electrical sign-off.
 3. Optionally perform independent final DRC and post-repair parasitic STA if full physical sign-off is required.
 
